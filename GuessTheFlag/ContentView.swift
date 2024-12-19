@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var scoreTitle = ""
     @State private var score = 0
     @State private var alertMessage = ""
+    @State private var round = 1
     
     
     
@@ -29,9 +30,17 @@ struct ContentView: View {
             VStack {
                 Spacer()
                 
-                Text("Guess the flag")
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(.white)
+                VStack(spacing: 10) {
+                    Text("Guess the flag")
+                        .font(.largeTitle.bold())
+                        .foregroundStyle(.white)
+                    
+                    Text("Round \(round)")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.white)
+                }
+                
+                Spacer()
                 
                 VStack(spacing: 15) {
                     VStack {
@@ -77,6 +86,7 @@ struct ContentView: View {
     }
     
     func flagTapped(_ number: Int ) {
+        round += 1
         if number == correctAnser {
             scoreTitle = "Good job!"
             score += 10
