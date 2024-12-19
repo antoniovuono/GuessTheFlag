@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var scoreTitle = ""
     @State private var score = 0
     @State private var alertMessage = ""
-    @State private var round = 1
+    @State private var round = 0
     
     
     
@@ -43,22 +43,46 @@ struct ContentView: View {
                 Spacer()
                 
                 VStack(spacing: 15) {
-                    VStack {
-                        Text("Tap the flag of")
+                    
+                    if round == 0  {
+                        Text("Start Guessing")
                             .foregroundStyle(.secondary)
-                            .font(.subheadline.weight(.heavy))
+                            .font(.title2.weight(.heavy))
                         
-                        Text(countries[correctAnser])
-                            .font(.largeTitle.weight(.semibold))
+                        Button() {
+                            round = 1
+                        } label: {
+                            Text("Start")
+                                .padding()
+                                .font(.subheadline.bold())
+                                .foregroundStyle(.white)
+                                .frame(maxWidth: 250)
+                                .background(Color(red: 0.1, green: 0.2, blue: 0.45))
+                                .clipShape(.capsule)
+                                .padding(.horizontal)
+                              
+                        }
+                        
                     }
                     
-                    ForEach(0..<3) { number in
-                        Button {
-                            flagTapped(number)
-                        } label: {
-                            Image(countries[number])
-                                .clipShape(.capsule)
-                                .shadow(radius: 1)
+                    if round != 0 {
+                        VStack {
+                            Text("Tap the flag of")
+                                .foregroundStyle(.secondary)
+                                .font(.subheadline.weight(.heavy))
+                            
+                            Text(countries[correctAnser])
+                                .font(.largeTitle.weight(.semibold))
+                        }
+                        
+                        ForEach(0..<3) { number in
+                            Button {
+                                flagTapped(number)
+                            } label: {
+                                Image(countries[number])
+                                    .clipShape(.capsule)
+                                    .shadow(radius: 1)
+                            }
                         }
                     }
                 }
