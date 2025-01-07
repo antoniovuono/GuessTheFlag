@@ -121,11 +121,18 @@ struct ContentView: View {
             alertMessage = "This flag belongs to \(countries[number])"
         }
         showingScore = true
+        resetGame()
     }
     
     func askQuestion() {
         countries.shuffle()
         correctAnser = Int.random(in: 0...2)
+    }
+    
+    func resetGame() {
+        if round >= 8 {
+            round = 0
+        }
     }
 }
 
